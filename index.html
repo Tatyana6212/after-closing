@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#14251f">
+  <title>После закрытия · Текстовый квест</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="world-extended.js" defer></script>
+  <script src="engine-extended.js" defer></script>
+  <script src="ambience.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header><a class="brand" href="./">ПОСЛЕ ЗАКРЫТИЯ</a><span>Текстовый квест / Этап 03</span></header>
+    <input id="file" type="file" accept=".txt,text/plain">
+    <section id="start-screen" class="start-screen" aria-labelledby="start-title">
+      <p class="eyebrow">ТЕКСТОВЫЙ КВЕСТ</p>
+      <h1 id="start-title">После закрытия</h1>
+      <p class="start-intro">Двери ночной библиотеки закрылись, но её история только начинается. Исследуйте комнаты, знакомьтесь с их обитателями и найдите свой путь до утра.</p>
+      <div id="load-help" class="load-help" hidden>
+        <p>Чтобы начать игру, выберите <strong>world.txt</strong> из той же папки, где находится этот HTML-файл.</p>
+        <button id="choose-world" type="button" class="story-action">Выбрать world.txt</button>
+      </div>
+      <div class="start-actions">
+        <button id="start-game" type="button" class="story-action" disabled>Начать игру</button>
+        <button id="continue-game" type="button" class="story-action secondary-action" hidden>Продолжить игру</button>
+      </div>
+      <p id="start-note" class="start-note" role="status">Загружаем библиотеку…</p>
+    </section>
+    <div id="game-shell" hidden>
+    <div class="sound-controls" role="group" aria-label="Звук игры">
+      <button id="sound-toggle" type="button" aria-pressed="false">Включить звук</button>
+      <label for="sound-volume">Громкость</label>
+      <input id="sound-volume" type="range" min="0" max="100" value="35">
+      <output id="sound-level" for="sound-volume">35%</output>
+    </div>
+    <article aria-labelledby="location-title">
+      <div class="eyebrow">ИССЛЕДУЙТЕ БИБЛИОТЕКУ</div>
+      <h1 id="location-title">Открываем мир…</h1>
+      <figure id="location-illustration" class="location-illustration" hidden>
+        <img id="location-art" src="assets/hall.png" width="1672" height="941" alt="Ночная библиотека" loading="lazy" decoding="async">
+      </figure>
+      <div id="story" aria-live="polite" aria-atomic="true"></div>
+      <div id="movement" class="movement" role="status" hidden></div>
+      <div id="event" class="event" role="status" hidden></div>
+      <section id="characters" class="characters" aria-label="Персонажи здесь" hidden></section>
+      <section id="dialogue" class="dialogue" aria-label="Разговор" hidden></section>
+      <div id="message" class="message" role="status" aria-live="polite" aria-atomic="true" hidden></div>
+      <section id="inventory" class="inventory" aria-labelledby="inventory-title" hidden>
+        <h2 id="inventory-title">Инвентарь</h2>
+        <ul id="inventory-items"></ul>
+      </section>
+    </article>
+    <section class="map-section" aria-labelledby="map-title">
+      <div class="map-heading"><h2 id="map-title">Карта исследования</h2><span id="progress"></span></div>
+      <p class="hint">Нажмите на соседнюю комнату, чтобы войти. Большую карту можно прокручивать.</p>
+      <nav class="nearby" aria-label="Соседние помещения">
+        <h3>Соседние помещения</h3>
+        <div id="nearby-links"></div>
+      </nav>
+      <div id="map" tabindex="0" aria-label="Карта мира, прокручиваемая область"><div id="map-canvas"></div></div>
+      <div class="legend"><span><i class="current-dot"></i>Вы здесь</span><span><i class="available-dot"></i>Можно перейти</span><span><i></i>Посещено</span><button id="center" type="button">К текущей локации</button></div>
+    </section>
+    <footer><span>Каждая новая комната — часть вашей истории.</span><div><label class="file-button" for="file">Открыть TXT</label><button id="restart" type="button">Начать сначала</button></div></footer>
+    </div>
+    <p id="status" role="status"></p>
+    <noscript>Для игры включите JavaScript в браузере.</noscript>
+  </main>
+</body>
+</html>
